@@ -1,18 +1,28 @@
 #!/bin/bash
 #
 # Auteur: kanzuke (kanzuke@wired.dynalias.org)
-# Nom du script: !!FICHIER!!
-# Date: !!DATE!!
+# Nom du script: sync_ldap_users.sh
+# Date: 02/08/11
+# Version: 0.1
 #
-# Template bash script, for when you need something overengineerd :)
+# Script de synchronisation des utilisateurs du ReadyNas par rapport à un serveur LDAP.
+# Solution adoptée dans la mesure où le couplage LDAP du ReadyNas ne permet plus d'utiliser
+# l'administration web du NAS
+#
+# Rôles:
+# Synchronisation des uids pour les utilisateurs existants au préalable sur le NAS
+#
+# Améliorations possibles:
+# - Ajout de nouveaux utilisateurs depuis le LDAP (uid>=500)
+# - Synchronisation des mots de passe (SAMBA et UNIX)
+
+ 
 
 
 
 #------------------------  VARIABLES  ------------------------#
 LDAP_HOST=psyche.wired.dynalias.org
 LDAP_BASEDN=dc=wired,dc=dynalias,dc=org
-LDAP_BINDDN=cn=ldap_admin,dc=wired,dc=dynalias,dc=org
-LDAP_BINDPW=ldap@wired
 
  
  
@@ -128,3 +138,5 @@ do
 	fi
 done < $SMB_USERS_TMP
 
+
+rm -f $SMB_USERS_TMP
